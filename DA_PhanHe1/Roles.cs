@@ -8,6 +8,9 @@ namespace DA_PhanHe1
 {
     public class Roles
     {
-        private string rolename { get; set; }
+        public string role { get; set; }
+        public string password_required { get; set; }
+        public string authentication_type { get; set; }
+        public string common { get; set; }
     }
 }

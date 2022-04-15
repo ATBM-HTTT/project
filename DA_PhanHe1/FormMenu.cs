@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dapper.Oracle;
 using Dapper;
 
 namespace DA_PhanHe1
@@ -21,93 +20,44 @@ namespace DA_PhanHe1
         {
             this.conn = conn;
             InitializeComponent();
+            
             getUsers();
+            getRole();
+            
         }
 
         private void getUsers()
         {
-            using (this.conn)
+            
+             UserGridView.DataSource = this.conn.Query<Users>("sp_viewuser", commandType: CommandType.StoredProcedure).ToList();
+            
+        }
+        private void getRole()
+        {
+            RoleGridView.DataSource = this.conn.Query<Roles>("sp_viewrole", commandType: CommandType.StoredProcedure).ToList();
+        }
+
+
+        private void btnUserSeach_Click(object sender, EventArgs e)
+        {
+            string txtUsername = txtUserSearch.Text;
+            if (txtUsername == "")
             {
-                OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
-                dynamicParameters.Add(name: ":Users", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
-                var users = this.conn.Query<Users>("sp_viewuser", param: dynamicParameters, commandType: CommandType.StoredProcedure).ToList();
-                UserGridView.DataSource = users;
+                getUsers();
             }
-        }
-        //private void getRole()
-        //{
-        //    using (this.conn)
-        //    {
-        //        var users = this.conn.Query<Roles>("dbo.sp_viewrole").ToList();
-        //        RoleGridView.DataSource = users;
-        //    }
-        //}
-
-
-        //private void btnUserSeach_Click(object sender, EventArgs e)
-        //{
-        //    string txtUsername = txtUserSearch.Text;
-        //    using (this.conn)
-        //    {
-        //    var users = this.conn.Query<Users>("dbo.sp_finduser @username", new { username = txtUsername }).ToList();
-        //    UserGridView.DataSource = users;
-        //    }
-        //}
-        
-         
-        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            else
+            {
+                UserGridView.DataSource = this.conn.Query<Users>("sp_finduser", new { usr = txtUsername }, commandType: CommandType.StoredProcedure).ToList();
+            }
+            
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+
+
+        private void btnUserRefresh_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-
+            UserGridView.Refresh();
         }
 
     }
