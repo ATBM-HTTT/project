@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,16 @@ namespace DA_PhanHe1
 {
     public partial class FormUserList : Form
     {
+        private OracleConnection conn;
+
         public FormUserList()
         {
             InitializeComponent();
         }
 
+        public FormUserList(OracleConnection conn)
+        {
+            this.conn = conn;
+        }
     }
 }

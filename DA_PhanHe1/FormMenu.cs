@@ -23,7 +23,17 @@ namespace DA_PhanHe1
 
         private void user_Click(object sender, EventArgs e)
         {
- 
+            if (conn.State == ConnectionState.Open)
+            {
+                //MessageBox.Show("Connected");
+                this.Hide();
+                FormUserList fm = new FormUserList(conn);
+                fm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Connected failed");
+            }
         }
     }
 }
