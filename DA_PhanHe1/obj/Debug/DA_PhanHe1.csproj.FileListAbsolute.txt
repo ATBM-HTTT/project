@@ -15,3 +15,7 @@ D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\Dapper.dll
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\Oracle.ManagedDataAccess.dll
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\Dapper.xml
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.CopyComplete
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\EntityFramework.dll
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\EntityFramework.SqlServer.dll
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\EntityFramework.xml
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\EntityFramework.SqlServer.xml
