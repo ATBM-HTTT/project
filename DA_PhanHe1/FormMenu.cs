@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper;
 
 namespace DA_PhanHe1
 {
@@ -19,6 +20,10 @@ namespace DA_PhanHe1
         {
             this.conn = conn;
             InitializeComponent();
+            
+            getUsers();
+            getRole();
+            
         }
 
         private void btnUserRefresh_Click(object sender, EventArgs e)
@@ -55,5 +60,39 @@ namespace DA_PhanHe1
             FormAddUser fm = new FormAddUser();
             fm.Show();
         }
+        private void getUsers()
+        {
+            
+             UserGridView.DataSource = this.conn.Query<Users>("sp_viewuser", commandType: CommandType.StoredProcedure).ToList();
+            
+        }
+        private void getRole()
+        {
+            RoleGridView.DataSource = this.conn.Query<Roles>("sp_viewrole", commandType: CommandType.StoredProcedure).ToList();
+        }
+
+
+        private void btnUserSeach_Click(object sender, EventArgs e)
+        {
+            string txtUsername = txtUserSearch.Text;
+            if (txtUsername == "")
+            {
+                getUsers();
+            }
+            else
+            {
+                UserGridView.DataSource = this.conn.Query<Users>("sp_finduser", new { usr = txtUsername }, commandType: CommandType.StoredProcedure).ToList();
+            }
+            
+        }
+
+
+
+
+        private void btnUserRefresh_Click(object sender, EventArgs e)
+        {
+            UserGridView.Refresh();
+        }
+
     }
 }

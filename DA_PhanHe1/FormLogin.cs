@@ -160,8 +160,13 @@ namespace DA_PhanHe1
                 Admin_login.password = password;
                 //MessageBox.Show("Connected");
                 this.Hide();
-                FormMenu fm = new FormMenu(conn);
-                fm.Show();
+                using (conn)
+                {
+                    FormMenu fm = new FormMenu(conn);
+                    fm.ShowDialog();
+                }
+                this.Show();
+
             }
             else
             {

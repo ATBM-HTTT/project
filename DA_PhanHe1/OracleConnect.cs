@@ -21,6 +21,5 @@ namespace DA_PhanHe1
               user,
               pass);
         }
-
     }
 }
