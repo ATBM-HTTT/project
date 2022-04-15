@@ -53,6 +53,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin_login.cs" />
+    <Compile Include="FormAddRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddRole.Designer.cs">
+      <DependentUpon>FormAddRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddUser.Designer.cs">
+      <DependentUpon>FormAddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGrant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGrant.Designer.cs">
+      <DependentUpon>FormGrant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRevoke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRevoke.Designer.cs">
+      <DependentUpon>FormRevoke.cs</DependentUpon>
+    </Compile>
     <Compile Include="OracleConnect.cs" />
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
@@ -74,11 +99,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAddRole.resx">
+      <DependentUpon>FormAddRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddUser.resx">
+      <DependentUpon>FormAddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGrant.resx">
+      <DependentUpon>FormGrant.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRevoke.resx">
+      <DependentUpon>FormRevoke.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUserList.resx">
       <DependentUpon>FormUserList.cs</DependentUpon>

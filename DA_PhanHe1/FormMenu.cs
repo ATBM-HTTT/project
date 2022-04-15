@@ -21,64 +21,39 @@ namespace DA_PhanHe1
             InitializeComponent();
         }
 
-        private void user_Click(object sender, EventArgs e)
+        private void btnUserRefresh_Click(object sender, EventArgs e)
         {
- 
+                //DataTable dt = new DataTable();
+                //OracleCommand cmd = new OracleCommand("sp_viewuser", conn);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.Add(
+                //    new OracleParameter
+                //    {
+                //        ParameterName = "c",
+                //        Direction = ParameterDirection.Output,
+                //        OracleDbType = OracleDbType.RefCursor
+                //    }
+                //);
+                //cmd.ExecuteNonQuery();
+                //OracleDataAdapter da = new OracleDataAdapter(cmd);
+                //da.Fill(dt);
+                //ListUser.DataSource = dt;
+                string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
+                var conn = new OracleConnection(connectionstring);
+                conn.Open();
+                DataTable dt = new DataTable();
+                OracleCommand cmd = new OracleCommand("select username, default_tablespace, created, last_login, account_status from dba_users", conn);
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                da.Fill(dt);
+                ListUser.DataSource = dt;
+            
         }
 
-        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnUserAdd_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-
+            this.Hide();
+            FormAddUser fm = new FormAddUser();
+            fm.Show();
         }
     }
 }

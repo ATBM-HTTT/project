@@ -156,6 +156,8 @@ namespace DA_PhanHe1
             }
             if (conn.State == ConnectionState.Open)
             {
+                Admin_login.username = username;
+                Admin_login.password = password;
                 //MessageBox.Show("Connected");
                 this.Hide();
                 FormMenu fm = new FormMenu(conn);

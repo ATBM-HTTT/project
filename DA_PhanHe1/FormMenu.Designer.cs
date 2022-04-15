@@ -30,27 +30,27 @@
         {
             this.TabControl = new System.Windows.Forms.TabControl();
             this.User = new System.Windows.Forms.TabPage();
-            this.Role = new System.Windows.Forms.TabPage();
+            this.ListUser = new System.Windows.Forms.DataGridView();
             this.btnUserGrant = new System.Windows.Forms.Button();
             this.btnUserDelete = new System.Windows.Forms.Button();
             this.btnUserEdit = new System.Windows.Forms.Button();
             this.btnUserAdd = new System.Windows.Forms.Button();
+            this.btnUserRefresh = new System.Windows.Forms.Button();
             this.btnUserSeach = new System.Windows.Forms.Button();
             this.txtUserSearch = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Role = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.btnRoleGrant = new System.Windows.Forms.Button();
             this.btnRoleDelete = new System.Windows.Forms.Button();
             this.btnRoleEdit = new System.Windows.Forms.Button();
             this.btnRoleAdd = new System.Windows.Forms.Button();
+            this.btnRoleRefresh = new System.Windows.Forms.Button();
             this.btnRoleSearch = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnUserRefresh = new System.Windows.Forms.Button();
-            this.btnRoleRefresh = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.User.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListUser)).BeginInit();
             this.Role.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,11 +64,10 @@
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(871, 431);
             this.TabControl.TabIndex = 0;
-            this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // User
             // 
-            this.User.Controls.Add(this.dataGridView1);
+            this.User.Controls.Add(this.ListUser);
             this.User.Controls.Add(this.btnUserGrant);
             this.User.Controls.Add(this.btnUserDelete);
             this.User.Controls.Add(this.btnUserEdit);
@@ -84,23 +83,13 @@
             this.User.Text = "User";
             this.User.UseVisualStyleBackColor = true;
             // 
-            // Role
+            // ListUser
             // 
-            this.Role.Controls.Add(this.dataGridView2);
-            this.Role.Controls.Add(this.btnRoleGrant);
-            this.Role.Controls.Add(this.btnRoleDelete);
-            this.Role.Controls.Add(this.btnRoleEdit);
-            this.Role.Controls.Add(this.btnRoleAdd);
-            this.Role.Controls.Add(this.btnRoleRefresh);
-            this.Role.Controls.Add(this.btnRoleSearch);
-            this.Role.Controls.Add(this.textBox1);
-            this.Role.Location = new System.Drawing.Point(4, 31);
-            this.Role.Name = "Role";
-            this.Role.Padding = new System.Windows.Forms.Padding(3);
-            this.Role.Size = new System.Drawing.Size(863, 396);
-            this.Role.TabIndex = 1;
-            this.Role.Text = "Role";
-            this.Role.UseVisualStyleBackColor = true;
+            this.ListUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ListUser.Location = new System.Drawing.Point(6, 85);
+            this.ListUser.Name = "ListUser";
+            this.ListUser.Size = new System.Drawing.Size(854, 311);
+            this.ListUser.TabIndex = 10;
             // 
             // btnUserGrant
             // 
@@ -141,6 +130,18 @@
             this.btnUserAdd.TabIndex = 8;
             this.btnUserAdd.Text = "Add";
             this.btnUserAdd.UseVisualStyleBackColor = true;
+            this.btnUserAdd.Click += new System.EventHandler(this.btnUserAdd_Click);
+            // 
+            // btnUserRefresh
+            // 
+            this.btnUserRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUserRefresh.Location = new System.Drawing.Point(6, 50);
+            this.btnUserRefresh.Name = "btnUserRefresh";
+            this.btnUserRefresh.Size = new System.Drawing.Size(70, 29);
+            this.btnUserRefresh.TabIndex = 9;
+            this.btnUserRefresh.Text = "Refresh";
+            this.btnUserRefresh.UseVisualStyleBackColor = true;
+            this.btnUserRefresh.Click += new System.EventHandler(this.btnUserRefresh_Click);
             // 
             // btnUserSeach
             // 
@@ -160,14 +161,23 @@
             this.txtUserSearch.Size = new System.Drawing.Size(223, 29);
             this.txtUserSearch.TabIndex = 4;
             // 
-            // dataGridView1
+            // Role
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 85);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(854, 311);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.Role.Controls.Add(this.dataGridView2);
+            this.Role.Controls.Add(this.btnRoleGrant);
+            this.Role.Controls.Add(this.btnRoleDelete);
+            this.Role.Controls.Add(this.btnRoleEdit);
+            this.Role.Controls.Add(this.btnRoleAdd);
+            this.Role.Controls.Add(this.btnRoleRefresh);
+            this.Role.Controls.Add(this.btnRoleSearch);
+            this.Role.Controls.Add(this.textBox1);
+            this.Role.Location = new System.Drawing.Point(4, 31);
+            this.Role.Name = "Role";
+            this.Role.Padding = new System.Windows.Forms.Padding(3);
+            this.Role.Size = new System.Drawing.Size(863, 396);
+            this.Role.TabIndex = 1;
+            this.Role.Text = "Role";
+            this.Role.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
@@ -176,7 +186,6 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(854, 307);
             this.dataGridView2.TabIndex = 17;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // btnRoleGrant
             // 
@@ -187,7 +196,6 @@
             this.btnRoleGrant.TabIndex = 12;
             this.btnRoleGrant.Text = "Grant";
             this.btnRoleGrant.UseVisualStyleBackColor = true;
-            this.btnRoleGrant.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnRoleDelete
             // 
@@ -198,7 +206,6 @@
             this.btnRoleDelete.TabIndex = 13;
             this.btnRoleDelete.Text = "Delete";
             this.btnRoleDelete.UseVisualStyleBackColor = true;
-            this.btnRoleDelete.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnRoleEdit
             // 
@@ -209,7 +216,6 @@
             this.btnRoleEdit.TabIndex = 14;
             this.btnRoleEdit.Text = "Edit";
             this.btnRoleEdit.UseVisualStyleBackColor = true;
-            this.btnRoleEdit.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnRoleAdd
             // 
@@ -220,38 +226,6 @@
             this.btnRoleAdd.TabIndex = 15;
             this.btnRoleAdd.Text = "Add";
             this.btnRoleAdd.UseVisualStyleBackColor = true;
-            this.btnRoleAdd.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // btnRoleSearch
-            // 
-            this.btnRoleSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoleSearch.Location = new System.Drawing.Point(241, 17);
-            this.btnRoleSearch.Name = "btnRoleSearch";
-            this.btnRoleSearch.Size = new System.Drawing.Size(70, 29);
-            this.btnRoleSearch.TabIndex = 16;
-            this.btnRoleSearch.Text = "Search";
-            this.btnRoleSearch.UseVisualStyleBackColor = true;
-            this.btnRoleSearch.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(6, 17);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(223, 29);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // btnUserRefresh
-            // 
-            this.btnUserRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserRefresh.Location = new System.Drawing.Point(6, 50);
-            this.btnUserRefresh.Name = "btnUserRefresh";
-            this.btnUserRefresh.Size = new System.Drawing.Size(70, 29);
-            this.btnUserRefresh.TabIndex = 9;
-            this.btnUserRefresh.Text = "Refresh";
-            this.btnUserRefresh.UseVisualStyleBackColor = true;
-            this.btnUserRefresh.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // btnRoleRefresh
             // 
@@ -262,7 +236,24 @@
             this.btnRoleRefresh.TabIndex = 16;
             this.btnRoleRefresh.Text = "Refresh";
             this.btnRoleRefresh.UseVisualStyleBackColor = true;
-            this.btnRoleRefresh.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnRoleSearch
+            // 
+            this.btnRoleSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRoleSearch.Location = new System.Drawing.Point(241, 17);
+            this.btnRoleSearch.Name = "btnRoleSearch";
+            this.btnRoleSearch.Size = new System.Drawing.Size(70, 29);
+            this.btnRoleSearch.TabIndex = 16;
+            this.btnRoleSearch.Text = "Search";
+            this.btnRoleSearch.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(6, 17);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(223, 29);
+            this.textBox1.TabIndex = 11;
             // 
             // FormMenu
             // 
@@ -276,9 +267,9 @@
             this.TabControl.ResumeLayout(false);
             this.User.ResumeLayout(false);
             this.User.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListUser)).EndInit();
             this.Role.ResumeLayout(false);
             this.Role.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
@@ -289,7 +280,7 @@
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage User;
         private System.Windows.Forms.TabPage Role;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ListUser;
         private System.Windows.Forms.Button btnUserGrant;
         private System.Windows.Forms.Button btnUserDelete;
         private System.Windows.Forms.Button btnUserEdit;
