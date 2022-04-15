@@ -69,7 +69,7 @@ namespace DA_PhanHe1
             this.txtUsername.Location = new System.Drawing.Point(333, 101);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(225, 29);
-            this.txtUsername.TabIndex = 3;
+            this.txtUsername.TabIndex = 1;
             // 
             // btnLogin
             // 
@@ -78,7 +78,7 @@ namespace DA_PhanHe1
             this.btnLogin.Location = new System.Drawing.Point(400, 199);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(85, 31);
-            this.btnLogin.TabIndex = 4;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -91,7 +91,7 @@ namespace DA_PhanHe1
             this.label4.Location = new System.Drawing.Point(522, 211);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 19);
-            this.label4.TabIndex = 5;
+            this.label4.TabIndex = 4;
             this.label4.Text = "Exit";
             // 
             // pictureBox1
@@ -111,7 +111,7 @@ namespace DA_PhanHe1
             this.txtPassword.Location = new System.Drawing.Point(333, 150);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(225, 29);
-            this.txtPassword.TabIndex = 3;
+            this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // FormLogin
