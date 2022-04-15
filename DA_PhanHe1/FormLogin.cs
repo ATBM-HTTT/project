@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace DA_PhanHe1
 {
@@ -23,11 +24,11 @@ namespace DA_PhanHe1
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtusername = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,22 +63,13 @@ namespace DA_PhanHe1
             this.label3.TabIndex = 2;
             this.label3.Text = "Password:";
             // 
-            // txtusername
+            // txtUsername
             // 
-            this.txtusername.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtusername.Location = new System.Drawing.Point(333, 101);
-            this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(225, 29);
-            this.txtusername.TabIndex = 3;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(333, 150);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(225, 29);
-            this.txtPassword.TabIndex = 3;
-            this.txtPassword.Visible = false;
+            this.txtUsername.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Location = new System.Drawing.Point(333, 101);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(225, 29);
+            this.txtUsername.TabIndex = 3;
             // 
             // btnLogin
             // 
@@ -89,6 +81,7 @@ namespace DA_PhanHe1
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // label4
             // 
@@ -111,6 +104,16 @@ namespace DA_PhanHe1
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // txtPassword
+            // 
+            this.txtPassword.CausesValidation = false;
+            this.txtPassword.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(333, 150);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(225, 29);
+            this.txtPassword.TabIndex = 3;
+            this.txtPassword.UseSystemPasswordChar = true;
+            // 
             // FormLogin
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -119,7 +122,7 @@ namespace DA_PhanHe1
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtusername);
+            this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -129,6 +132,50 @@ namespace DA_PhanHe1
             this.PerformLayout();
 
         }
+        
+        
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+            //validate username and password before connect database
 
+            string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", username, password);
+            var conn = new OracleConnection(connectionstring);
+            if (conn.State == ConnectionState.Closed)
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid username or password");
+                    return;
+                }
+            }
+            if (conn.State == ConnectionState.Open)
+            {
+                //MessageBox.Show("Connected");
+                this.Hide();
+                FormMenu fm = new FormMenu(conn);
+                fm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Connected failed");
+            }
+
+            //if (username == "admin" && password == "admin")
+            //{
+            //    FormMenu formMain = new FormMenu();
+            //    formMain.Show();
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Username or Password is incorrect");
+            //}
+        }
     }
 }

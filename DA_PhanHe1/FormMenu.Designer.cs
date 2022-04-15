@@ -43,6 +43,7 @@
             this.user.TabIndex = 0;
             this.user.Text = "User";
             this.user.UseVisualStyleBackColor = true;
+            this.user.Click += new System.EventHandler(this.user_Click);
             // 
             // role
             // 

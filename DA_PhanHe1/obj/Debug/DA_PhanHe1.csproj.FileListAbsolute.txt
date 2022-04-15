@@ -1,0 +1,17 @@
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.AssemblyReference.cache
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.SuggestedBindingRedirects.cache
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormLogin.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormMenu.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormUserList.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.GenerateResource.cache
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\DA_PhanHe1.exe.config
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\DA_PhanHe1.exe
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\DA_PhanHe1.pdb
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.Properties.Resources.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.CoreCompileInputs.cache
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.exe
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.pdb
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\Dapper.dll
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\Oracle.ManagedDataAccess.dll
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\Dapper.xml
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.CopyComplete

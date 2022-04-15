@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,17 @@ namespace DA_PhanHe1
 {
     public partial class FormMenu : Form
     {
-        public FormMenu()
+        private OracleConnection conn;
+        
+        public FormMenu(OracleConnection conn)
         {
+            this.conn = conn;
             InitializeComponent();
+        }
+
+        private void user_Click(object sender, EventArgs e)
+        {
+ 
         }
     }
 }
