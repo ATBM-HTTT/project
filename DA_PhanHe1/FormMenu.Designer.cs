@@ -88,7 +88,10 @@
             // 
             this.UserGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UserGridView.Location = new System.Drawing.Point(6, 85);
+            this.UserGridView.MultiSelect = false;
             this.UserGridView.Name = "UserGridView";
+            this.UserGridView.ReadOnly = true;
+            this.UserGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.UserGridView.Size = new System.Drawing.Size(854, 311);
             this.UserGridView.TabIndex = 10;
             this.UserGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -153,6 +156,7 @@
             this.btnUserSeach.TabIndex = 9;
             this.btnUserSeach.Text = "Search";
             this.btnUserSeach.UseVisualStyleBackColor = true;
+            this.btnUserSeach.Click += new System.EventHandler(this.btnUserSeach_Click);
             // 
             // txtUserSearch
             // 
@@ -184,7 +188,9 @@
             // 
             this.RoleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RoleGridView.Location = new System.Drawing.Point(6, 86);
+            this.RoleGridView.MultiSelect = false;
             this.RoleGridView.Name = "RoleGridView";
+            this.RoleGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RoleGridView.Size = new System.Drawing.Size(854, 307);
             this.RoleGridView.TabIndex = 17;
             this.RoleGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper.Oracle;
+using Dapper;
 
 namespace DA_PhanHe1
 {
@@ -19,13 +21,40 @@ namespace DA_PhanHe1
         {
             this.conn = conn;
             InitializeComponent();
+            getUsers();
         }
 
-        private void user_Click(object sender, EventArgs e)
+        private void getUsers()
         {
- 
+            using (this.conn)
+            {
+                OracleDynamicParameters dynamicParameters = new OracleDynamicParameters();
+                dynamicParameters.Add(name: ":Users", dbType: OracleMappingType.RefCursor, direction: ParameterDirection.Output);
+                var users = this.conn.Query<Users>("sp_viewuser", param: dynamicParameters, commandType: CommandType.StoredProcedure).ToList();
+                UserGridView.DataSource = users;
+            }
         }
+        //private void getRole()
+        //{
+        //    using (this.conn)
+        //    {
+        //        var users = this.conn.Query<Roles>("dbo.sp_viewrole").ToList();
+        //        RoleGridView.DataSource = users;
+        //    }
+        //}
 
+
+        //private void btnUserSeach_Click(object sender, EventArgs e)
+        //{
+        //    string txtUsername = txtUserSearch.Text;
+        //    using (this.conn)
+        //    {
+        //    var users = this.conn.Query<Users>("dbo.sp_finduser @username", new { username = txtUsername }).ToList();
+        //    UserGridView.DataSource = users;
+        //    }
+        //}
+        
+         
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -80,5 +109,6 @@ namespace DA_PhanHe1
         {
 
         }
+
     }
 }
