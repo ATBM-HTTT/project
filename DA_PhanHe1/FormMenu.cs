@@ -63,13 +63,25 @@ namespace DA_PhanHe1
         }
         private void getUsers()
         {
-            
-             UserGridView.DataSource = this.conn.Query<Users>("sp_viewuser", commandType: CommandType.StoredProcedure).ToList();
-            
+            try
+            {
+                UserGridView.DataSource = this.conn.Query<Users>("sp_viewuser", commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
         }
         private void getRole()
         {
-            RoleGridView.DataSource = this.conn.Query<Roles>("sp_viewrole", commandType: CommandType.StoredProcedure).ToList();
+            try
+            {
+                RoleGridView.DataSource = this.conn.Query<Roles>("sp_viewrole", commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
         }
 
 
@@ -82,7 +94,14 @@ namespace DA_PhanHe1
             }
             else
             {
-                UserGridView.DataSource = this.conn.Query<Users>("sp_finduser", new { usr = txtUsername }, commandType: CommandType.StoredProcedure).ToList();
+                try
+                {
+                    UserGridView.DataSource = this.conn.Query<Users>("sp_finduser", new { usr = txtUsername }, commandType: CommandType.StoredProcedure).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+                }
             }
             
         }
@@ -126,8 +145,7 @@ namespace DA_PhanHe1
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
-                    message = "Error! " + ex.ToString();
+                    message = "Error! \n" + ex.ToString();
                 }
                 DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
@@ -213,7 +231,7 @@ namespace DA_PhanHe1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnViewRolePriv_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormRoleViewPriv fm = new FormRoleViewPriv();
