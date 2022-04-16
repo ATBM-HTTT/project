@@ -31,7 +31,6 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.User = new System.Windows.Forms.TabPage();
             this.UserGridView = new System.Windows.Forms.DataGridView();
-            this.btnUserGrant = new System.Windows.Forms.Button();
             this.btnUserDelete = new System.Windows.Forms.Button();
             this.btnUserViewPriv = new System.Windows.Forms.Button();
             this.btnUserAdd = new System.Windows.Forms.Button();
@@ -39,16 +38,13 @@
             this.btnUserSeach = new System.Windows.Forms.Button();
             this.txtUserSearch = new System.Windows.Forms.TextBox();
             this.Role = new System.Windows.Forms.TabPage();
+            this.btnViewRolePriv = new System.Windows.Forms.Button();
             this.RoleGridView = new System.Windows.Forms.DataGridView();
-            this.btnRoleGrant = new System.Windows.Forms.Button();
             this.btnRoleDelete = new System.Windows.Forms.Button();
             this.btnRoleAdd = new System.Windows.Forms.Button();
             this.btnRoleRefresh = new System.Windows.Forms.Button();
             this.btnRoleSearch = new System.Windows.Forms.Button();
             this.txtRoleSearch = new System.Windows.Forms.TextBox();
-            this.btnUserRevoke = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnViewRolePriv = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.User.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserGridView)).BeginInit();
@@ -70,9 +66,7 @@
             // User
             // 
             this.User.Controls.Add(this.UserGridView);
-            this.User.Controls.Add(this.btnUserGrant);
             this.User.Controls.Add(this.btnUserDelete);
-            this.User.Controls.Add(this.btnUserRevoke);
             this.User.Controls.Add(this.btnUserViewPriv);
             this.User.Controls.Add(this.btnUserAdd);
             this.User.Controls.Add(this.btnUserRefresh);
@@ -97,20 +91,10 @@
             this.UserGridView.Size = new System.Drawing.Size(854, 311);
             this.UserGridView.TabIndex = 10;
             // 
-            // btnUserGrant
-            // 
-            this.btnUserGrant.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserGrant.Location = new System.Drawing.Point(794, 14);
-            this.btnUserGrant.Name = "btnUserGrant";
-            this.btnUserGrant.Size = new System.Drawing.Size(66, 29);
-            this.btnUserGrant.TabIndex = 5;
-            this.btnUserGrant.Text = "Grant";
-            this.btnUserGrant.UseVisualStyleBackColor = true;
-            // 
             // btnUserDelete
             // 
             this.btnUserDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserDelete.Location = new System.Drawing.Point(725, 14);
+            this.btnUserDelete.Location = new System.Drawing.Point(666, 14);
             this.btnUserDelete.Name = "btnUserDelete";
             this.btnUserDelete.Size = new System.Drawing.Size(66, 29);
             this.btnUserDelete.TabIndex = 6;
@@ -121,7 +105,7 @@
             // btnUserViewPriv
             // 
             this.btnUserViewPriv.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserViewPriv.Location = new System.Drawing.Point(653, 50);
+            this.btnUserViewPriv.Location = new System.Drawing.Point(738, 14);
             this.btnUserViewPriv.Name = "btnUserViewPriv";
             this.btnUserViewPriv.Size = new System.Drawing.Size(119, 29);
             this.btnUserViewPriv.TabIndex = 7;
@@ -132,7 +116,7 @@
             // btnUserAdd
             // 
             this.btnUserAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserAdd.Location = new System.Drawing.Point(653, 14);
+            this.btnUserAdd.Location = new System.Drawing.Point(594, 14);
             this.btnUserAdd.Name = "btnUserAdd";
             this.btnUserAdd.Size = new System.Drawing.Size(66, 29);
             this.btnUserAdd.TabIndex = 8;
@@ -172,10 +156,8 @@
             // 
             // Role
             // 
-            this.Role.Controls.Add(this.button1);
             this.Role.Controls.Add(this.btnViewRolePriv);
             this.Role.Controls.Add(this.RoleGridView);
-            this.Role.Controls.Add(this.btnRoleGrant);
             this.Role.Controls.Add(this.btnRoleDelete);
             this.Role.Controls.Add(this.btnRoleAdd);
             this.Role.Controls.Add(this.btnRoleRefresh);
@@ -189,6 +171,17 @@
             this.Role.Text = "Role";
             this.Role.UseVisualStyleBackColor = true;
             // 
+            // btnViewRolePriv
+            // 
+            this.btnViewRolePriv.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewRolePriv.Location = new System.Drawing.Point(734, 17);
+            this.btnViewRolePriv.Name = "btnViewRolePriv";
+            this.btnViewRolePriv.Size = new System.Drawing.Size(119, 29);
+            this.btnViewRolePriv.TabIndex = 20;
+            this.btnViewRolePriv.Text = "View privileges";
+            this.btnViewRolePriv.UseVisualStyleBackColor = true;
+            this.btnViewRolePriv.Click += new System.EventHandler(this.btnViewRolePriv_Click);
+            // 
             // RoleGridView
             // 
             this.RoleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -197,23 +190,13 @@
             this.RoleGridView.Name = "RoleGridView";
             this.RoleGridView.ReadOnly = true;
             this.RoleGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.RoleGridView.Size = new System.Drawing.Size(854, 267);
+            this.RoleGridView.Size = new System.Drawing.Size(854, 306);
             this.RoleGridView.TabIndex = 18;
-            // 
-            // btnRoleGrant
-            // 
-            this.btnRoleGrant.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoleGrant.Location = new System.Drawing.Point(794, 16);
-            this.btnRoleGrant.Name = "btnRoleGrant";
-            this.btnRoleGrant.Size = new System.Drawing.Size(66, 29);
-            this.btnRoleGrant.TabIndex = 12;
-            this.btnRoleGrant.Text = "Grant";
-            this.btnRoleGrant.UseVisualStyleBackColor = true;
             // 
             // btnRoleDelete
             // 
             this.btnRoleDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoleDelete.Location = new System.Drawing.Point(725, 16);
+            this.btnRoleDelete.Location = new System.Drawing.Point(662, 16);
             this.btnRoleDelete.Name = "btnRoleDelete";
             this.btnRoleDelete.Size = new System.Drawing.Size(66, 29);
             this.btnRoleDelete.TabIndex = 13;
@@ -224,7 +207,7 @@
             // btnRoleAdd
             // 
             this.btnRoleAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoleAdd.Location = new System.Drawing.Point(653, 17);
+            this.btnRoleAdd.Location = new System.Drawing.Point(590, 16);
             this.btnRoleAdd.Name = "btnRoleAdd";
             this.btnRoleAdd.Size = new System.Drawing.Size(66, 29);
             this.btnRoleAdd.TabIndex = 15;
@@ -262,38 +245,6 @@
             this.txtRoleSearch.Size = new System.Drawing.Size(223, 29);
             this.txtRoleSearch.TabIndex = 11;
             // 
-            // btnUserRevoke
-            // 
-            this.btnUserRevoke.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserRevoke.Location = new System.Drawing.Point(778, 49);
-            this.btnUserRevoke.Name = "btnUserRevoke";
-            this.btnUserRevoke.Size = new System.Drawing.Size(82, 29);
-            this.btnUserRevoke.TabIndex = 7;
-            this.btnUserRevoke.Text = "Revoke";
-            this.btnUserRevoke.UseVisualStyleBackColor = true;
-            this.btnUserRevoke.Click += new System.EventHandler(this.btnUserRevoke_Click);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(778, 51);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 29);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Revoke";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnViewRolePriv
-            // 
-            this.btnViewRolePriv.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewRolePriv.Location = new System.Drawing.Point(653, 52);
-            this.btnViewRolePriv.Name = "btnViewRolePriv";
-            this.btnViewRolePriv.Size = new System.Drawing.Size(119, 29);
-            this.btnViewRolePriv.TabIndex = 20;
-            this.btnViewRolePriv.Text = "View privileges";
-            this.btnViewRolePriv.UseVisualStyleBackColor = true;
-            this.btnViewRolePriv.Click += new System.EventHandler(this.btnViewRolePriv_Click);
-            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,13 +271,11 @@
         private System.Windows.Forms.TabPage User;
         private System.Windows.Forms.TabPage Role;
         private System.Windows.Forms.DataGridView UserGridView;
-        private System.Windows.Forms.Button btnUserGrant;
         private System.Windows.Forms.Button btnUserDelete;
         private System.Windows.Forms.Button btnUserViewPriv;
         private System.Windows.Forms.Button btnUserAdd;
         private System.Windows.Forms.Button btnUserSeach;
         private System.Windows.Forms.TextBox txtUserSearch;
-        private System.Windows.Forms.Button btnRoleGrant;
         private System.Windows.Forms.Button btnRoleDelete;
         private System.Windows.Forms.Button btnRoleAdd;
         private System.Windows.Forms.Button btnRoleSearch;
@@ -334,8 +283,6 @@
         private System.Windows.Forms.Button btnUserRefresh;
         private System.Windows.Forms.Button btnRoleRefresh;
         private System.Windows.Forms.DataGridView RoleGridView;
-        private System.Windows.Forms.Button btnUserRevoke;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnViewRolePriv;
     }
 }

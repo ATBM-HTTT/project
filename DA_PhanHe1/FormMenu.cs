@@ -252,9 +252,33 @@ namespace DA_PhanHe1
 
         private void btnViewRolePriv_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormRoleViewPriv fm = new FormRoleViewPriv(this.conn);
-            fm.ShowDialog();
+            //this.Hide();
+            //FormRoleViewPriv fm = new FormRoleViewPriv(this.conn);
+            //fm.ShowDialog();
+            //this.Show();
+
+            try
+            {
+                int index_row = RoleGridView.CurrentCell.RowIndex;
+                if (index_row != -1)
+                {
+                    OracleCommand cmd = conn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                    cmd.ExecuteNonQuery();
+                    string rolename = RoleGridView.Rows[index_row].Cells[0].Value.ToString();
+
+                    this.Hide();
+
+                    FormRoleViewPriv fm = new FormRoleViewPriv(this.conn, rolename);
+                    fm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
+
             this.Show();
         }
     }

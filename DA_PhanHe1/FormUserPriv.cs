@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -96,11 +96,8 @@ namespace DA_PhanHe1
 
         private void FormUserPriv_Load(object sender, EventArgs e)
         {
-            txtPerGrant.Enabled = false;
             txtOnGrant.Enabled = false;
             txtColGrant.Enabled = false;
-            checkBoxGrant.Enabled = false;
-            btnAccept.Enabled = false;
         }
 
 
@@ -129,17 +126,14 @@ namespace DA_PhanHe1
             }
         }
 
-        private void btnRevoke_Click(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
             string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
             var conn = new OracleConnection(connectionstring);
             string message = "";
-            string user = txtUserPriv.Text;
+            string user = Username;
             string per = txtPerGrant.Text;
             string on = txtOnGrant.Text;
             string col = txtColGrant.Text;
@@ -215,20 +209,20 @@ namespace DA_PhanHe1
             //    this.Close();
         }
 
-        private void txtUserPriv_TextChanged(object sender, EventArgs e)
-        {
-            if (txtUserPriv.Text != "")
-            {
-                txtPerGrant.Enabled = true;
-                checkBoxGrant.Enabled = true;
-                btnAccept.Enabled = true;
-            }
-            else
-            {
-                txtPerGrant.Enabled = false;
-                checkBoxGrant.Enabled = false;
-                btnAccept.Enabled = false;
-            }
-        }
+        //private void txtUserPriv_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (txtUserPriv.Text != "")
+        //    {
+        //        txtPerGrant.Enabled = true;
+        //        checkBoxGrant.Enabled = true;
+        //        btnAccept.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        txtPerGrant.Enabled = false;
+        //        checkBoxGrant.Enabled = false;
+        //        btnAccept.Enabled = false;
+        //    }
+        //}
     }
 }
