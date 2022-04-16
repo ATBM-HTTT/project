@@ -292,7 +292,7 @@
             this.btnViewRolePriv.TabIndex = 20;
             this.btnViewRolePriv.Text = "View privileges";
             this.btnViewRolePriv.UseVisualStyleBackColor = true;
-            this.btnViewRolePriv.Click += new System.EventHandler(this.button2_Click);
+            this.btnViewRolePriv.Click += new System.EventHandler(this.btnViewRolePriv_Click);
             // 
             // FormMenu
             // 

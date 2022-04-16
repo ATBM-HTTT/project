@@ -2,7 +2,6 @@ D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.As
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.SuggestedBindingRedirects.cache
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormLogin.resources
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormMenu.resources
-D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormUserList.resources
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.GenerateResource.cache
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\DA_PhanHe1.exe.config
 D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\bin\Debug\DA_PhanHe1.exe
@@ -37,3 +36,9 @@ D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormGrant.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormRevoke.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormUserPriv.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormRoleViewPriv.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormAddRole.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormAddUser.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormGrant.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormRevoke.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormRoleViewPriv.resources
+D:\Git\DatabaseAdminWinformApp\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormUserPriv.resources

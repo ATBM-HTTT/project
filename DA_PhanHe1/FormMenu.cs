@@ -57,19 +57,31 @@ namespace DA_PhanHe1
         private void btnUserAdd_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormAddUser fm = new FormAddUser();
+            FormAddUser fm = new FormAddUser(this.conn);
             fm.ShowDialog();
             this.Show();
         }
         private void getUsers()
         {
-            
-             UserGridView.DataSource = this.conn.Query<Users>("sp_viewuser", commandType: CommandType.StoredProcedure).ToList();
-            
+            try
+            {
+                UserGridView.DataSource = this.conn.Query<Users>("sp_viewuser", commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
         }
         private void getRole()
         {
-            RoleGridView.DataSource = this.conn.Query<Roles>("sp_viewrole", commandType: CommandType.StoredProcedure).ToList();
+            try
+            {
+                RoleGridView.DataSource = this.conn.Query<Roles>("sp_viewrole", commandType: CommandType.StoredProcedure).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
         }
 
 
@@ -82,7 +94,14 @@ namespace DA_PhanHe1
             }
             else
             {
-                UserGridView.DataSource = this.conn.Query<Users>("sp_finduser", new { usr = txtUsername }, commandType: CommandType.StoredProcedure).ToList();
+                try
+                {
+                    UserGridView.DataSource = this.conn.Query<Users>("sp_finduser", new { usr = txtUsername }, commandType: CommandType.StoredProcedure).ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+                }
             }
             
         }
@@ -126,8 +145,7 @@ namespace DA_PhanHe1
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
-                    message = "Error! " + ex.ToString();
+                    message = "Error! \n" + ex.ToString();
                 }
                 DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
@@ -135,16 +153,35 @@ namespace DA_PhanHe1
 
         private void btnUserViewPriv_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormUserPriv fm = new FormUserPriv();
-            fm.ShowDialog();
+            try
+            {
+                int index_row = UserGridView.CurrentCell.RowIndex;
+                if (index_row != -1)
+                {
+                    OracleCommand cmd = conn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                    cmd.ExecuteNonQuery();
+                    string username = UserGridView.Rows[index_row].Cells[0].Value.ToString();
+
+                    this.Hide();
+
+                    FormUserPriv fm = new FormUserPriv(this.conn, username);
+                    fm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
+
             this.Show();
         }
 
         private void btnUserRevoke_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormRevoke fm = new FormRevoke();
+            FormRevoke fm = new FormRevoke(this.conn);
             fm.ShowDialog();
             this.Show();
         }
@@ -171,7 +208,7 @@ namespace DA_PhanHe1
         private void btnRoleAdd_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormAddRole fm = new FormAddRole();
+            FormAddRole fm = new FormAddRole(this.conn);
             fm.ShowDialog();
             this.Show();
         }
@@ -213,10 +250,10 @@ namespace DA_PhanHe1
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnViewRolePriv_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormRoleViewPriv fm = new FormRoleViewPriv();
+            FormRoleViewPriv fm = new FormRoleViewPriv(this.conn);
             fm.ShowDialog();
             this.Show();
         }
