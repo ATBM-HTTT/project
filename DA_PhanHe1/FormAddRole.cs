@@ -12,19 +12,20 @@ namespace DA_PhanHe1
 {
     public partial class FormAddRole : Form
     {
-        public FormAddRole()
+        private OracleConnection conn;
+   
+
+        public FormAddRole(OracleConnection conn)
         {
+            this.conn = conn;
             InitializeComponent();
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
-            var conn = new OracleConnection(connectionstring);
             string message = "";
             try
             {
-                conn.Open();
                 OracleCommand cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
@@ -48,10 +49,7 @@ namespace DA_PhanHe1
                 Console.WriteLine(ex.ToString());
                 message = "Error! " + ex.ToString();
             }
-            finally
-            {
-                conn.Close();
-            }
+            
 
             DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
 

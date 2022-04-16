@@ -57,7 +57,7 @@ namespace DA_PhanHe1
         private void btnUserAdd_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormAddUser fm = new FormAddUser();
+            FormAddUser fm = new FormAddUser(this.conn);
             fm.ShowDialog();
             this.Show();
         }
@@ -154,8 +154,11 @@ namespace DA_PhanHe1
         private void btnUserViewPriv_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormUserPriv fm = new FormUserPriv();
+
+            FormUserPriv fm = new FormUserPriv(this.conn);
             fm.ShowDialog();
+            
+
             this.Show();
         }
 
@@ -189,7 +192,7 @@ namespace DA_PhanHe1
         private void btnRoleAdd_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormAddRole fm = new FormAddRole();
+            FormAddRole fm = new FormAddRole(this.conn);
             fm.ShowDialog();
             this.Show();
         }
@@ -234,7 +237,7 @@ namespace DA_PhanHe1
         private void btnViewRolePriv_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormRoleViewPriv fm = new FormRoleViewPriv();
+            FormRoleViewPriv fm = new FormRoleViewPriv(this.conn);
             fm.ShowDialog();
             this.Show();
         }
