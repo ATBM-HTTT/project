@@ -153,11 +153,27 @@ namespace DA_PhanHe1
 
         private void btnUserViewPriv_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            try
+            {
+                int index_row = UserGridView.CurrentCell.RowIndex;
+                if (index_row != -1)
+                {
+                    OracleCommand cmd = conn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                    cmd.ExecuteNonQuery();
+                    string username = UserGridView.Rows[index_row].Cells[0].Value.ToString();
 
-            FormUserPriv fm = new FormUserPriv(this.conn);
-            fm.ShowDialog();
-            
+                    this.Hide();
+
+                    FormUserPriv fm = new FormUserPriv(this.conn, username);
+                    fm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK);
+            }
 
             this.Show();
         }

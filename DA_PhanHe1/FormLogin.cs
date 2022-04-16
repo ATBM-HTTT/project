@@ -155,6 +155,8 @@ namespace DA_PhanHe1
                 }
                 txtPassword.Text = "";
                 this.Show();
+                conn.Close();
+                conn.Dispose();
 
             }
             else
