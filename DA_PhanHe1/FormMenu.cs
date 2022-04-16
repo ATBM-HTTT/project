@@ -165,7 +165,7 @@ namespace DA_PhanHe1
         private void btnUserRevoke_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormRevoke fm = new FormRevoke();
+            FormRevoke fm = new FormRevoke(this.conn);
             fm.ShowDialog();
             this.Show();
         }
