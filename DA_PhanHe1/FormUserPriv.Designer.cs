@@ -33,6 +33,16 @@
             this.btnUserPrivExit = new System.Windows.Forms.Button();
             this.btnUserPrivView = new System.Windows.Forms.Button();
             this.txtUserPriv = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtPerGrant = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtOnGrant = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtColGrant = new System.Windows.Forms.TextBox();
+            this.checkBoxGrant = new System.Windows.Forms.CheckBox();
+            this.btnRevoke = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UserPrivGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +61,7 @@
             this.UserPrivGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UserPrivGridView.Location = new System.Drawing.Point(0, 138);
             this.UserPrivGridView.Name = "UserPrivGridView";
-            this.UserPrivGridView.Size = new System.Drawing.Size(530, 425);
+            this.UserPrivGridView.Size = new System.Drawing.Size(520, 425);
             this.UserPrivGridView.TabIndex = 1;
             // 
             // btnUserPrivExit
@@ -83,19 +93,130 @@
             this.txtUserPriv.Name = "txtUserPriv";
             this.txtUserPriv.Size = new System.Drawing.Size(223, 29);
             this.txtUserPriv.TabIndex = 10;
+            this.txtUserPriv.TextChanged += new System.EventHandler(this.txtUserPriv_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(686, 91);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 31);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Grant";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(565, 181);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 24);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Permission";
+            // 
+            // txtPerGrant
+            // 
+            this.txtPerGrant.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPerGrant.Location = new System.Drawing.Point(707, 176);
+            this.txtPerGrant.Name = "txtPerGrant";
+            this.txtPerGrant.Size = new System.Drawing.Size(223, 29);
+            this.txtPerGrant.TabIndex = 10;
+            this.txtPerGrant.TextChanged += new System.EventHandler(this.txtPerGrant_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(565, 248);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 24);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "On";
+            // 
+            // txtOnGrant
+            // 
+            this.txtOnGrant.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOnGrant.Location = new System.Drawing.Point(707, 243);
+            this.txtOnGrant.Name = "txtOnGrant";
+            this.txtOnGrant.Size = new System.Drawing.Size(223, 29);
+            this.txtOnGrant.TabIndex = 10;
+            this.txtOnGrant.TextChanged += new System.EventHandler(this.txtOnGrant_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(565, 315);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 24);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Column";
+            // 
+            // txtColGrant
+            // 
+            this.txtColGrant.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtColGrant.Location = new System.Drawing.Point(707, 310);
+            this.txtColGrant.Name = "txtColGrant";
+            this.txtColGrant.Size = new System.Drawing.Size(223, 29);
+            this.txtColGrant.TabIndex = 10;
+            // 
+            // checkBoxGrant
+            // 
+            this.checkBoxGrant.AutoSize = true;
+            this.checkBoxGrant.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxGrant.Location = new System.Drawing.Point(707, 382);
+            this.checkBoxGrant.Name = "checkBoxGrant";
+            this.checkBoxGrant.Size = new System.Drawing.Size(214, 25);
+            this.checkBoxGrant.TabIndex = 14;
+            this.checkBoxGrant.Text = "Grant with another user";
+            this.checkBoxGrant.UseVisualStyleBackColor = true;
+            // 
+            // btnRevoke
+            // 
+            this.btnRevoke.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRevoke.Location = new System.Drawing.Point(372, 91);
+            this.btnRevoke.Name = "btnRevoke";
+            this.btnRevoke.Size = new System.Drawing.Size(79, 29);
+            this.btnRevoke.TabIndex = 15;
+            this.btnRevoke.Text = "Revoke";
+            this.btnRevoke.UseVisualStyleBackColor = true;
+            this.btnRevoke.Click += new System.EventHandler(this.btnRevoke_Click);
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAccept.Location = new System.Drawing.Point(846, 446);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(75, 34);
+            this.btnAccept.TabIndex = 16;
+            this.btnAccept.Text = "Accept";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // FormUserPriv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 561);
+            this.ClientSize = new System.Drawing.Size(951, 561);
+            this.Controls.Add(this.btnAccept);
+            this.Controls.Add(this.btnRevoke);
+            this.Controls.Add(this.checkBoxGrant);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnUserPrivView);
+            this.Controls.Add(this.txtColGrant);
+            this.Controls.Add(this.txtOnGrant);
+            this.Controls.Add(this.txtPerGrant);
             this.Controls.Add(this.txtUserPriv);
             this.Controls.Add(this.btnUserPrivExit);
             this.Controls.Add(this.UserPrivGridView);
             this.Controls.Add(this.label1);
             this.Name = "FormUserPriv";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.FormUserPriv_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UserPrivGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -109,5 +230,15 @@
         private System.Windows.Forms.Button btnUserPrivExit;
         private System.Windows.Forms.Button btnUserPrivView;
         private System.Windows.Forms.TextBox txtUserPriv;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtPerGrant;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtOnGrant;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtColGrant;
+        private System.Windows.Forms.CheckBox checkBoxGrant;
+        private System.Windows.Forms.Button btnRevoke;
+        private System.Windows.Forms.Button btnAccept;
     }
 }

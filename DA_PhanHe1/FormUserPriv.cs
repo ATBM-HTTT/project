@@ -28,11 +28,148 @@ namespace DA_PhanHe1
             var conn = new OracleConnection(connectionstring);
             conn.Open();
             DataTable dt = new DataTable();
-            string priv_user = "select grantee, grantor, privilege, table_name, grantable from dba_tab_privs where grantor = upper('" + txtUserPriv.Text + "')";
+            string priv_user = "select * from dba_sys_privs where grantee = upper('" + txtUserPriv.Text + "')";
             OracleCommand cmd = new OracleCommand(priv_user, conn);
             OracleDataAdapter da = new OracleDataAdapter(cmd);
             da.Fill(dt);
             UserPrivGridView.DataSource = dt;
+        }
+
+        private void FormUserPriv_Load(object sender, EventArgs e)
+        {
+            txtPerGrant.Enabled = false;
+            txtOnGrant.Enabled = false;
+            txtColGrant.Enabled = false;
+            checkBoxGrant.Enabled = false;
+            btnAccept.Enabled = false;
+        }
+
+
+        private void txtPerGrant_TextChanged(object sender, EventArgs e)
+        {
+            if(txtPerGrant.Text.ToLower() == "select" || txtPerGrant.Text.ToLower() == "insert"
+                || txtPerGrant.Text.ToLower() == "update" ||  txtPerGrant.Text.ToLower() == "delete")
+            {
+                txtOnGrant.Enabled = true;
+            }
+            else
+            {
+                txtOnGrant.Enabled = false;
+            }
+        }
+
+        private void txtOnGrant_TextChanged(object sender, EventArgs e)
+        {
+            if(txtPerGrant.Text.ToLower() == "select" || txtPerGrant.Text.ToLower() == "update")
+            {
+                txtColGrant.Enabled = true;
+            }
+            else
+            {
+                txtColGrant.Enabled = false;
+            }
+        }
+
+        private void btnRevoke_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
+            var conn = new OracleConnection(connectionstring);
+            string message = "";
+            string user = txtUserPriv.Text;
+            string per = txtPerGrant.Text;
+            string on = txtOnGrant.Text;
+            string col = txtColGrant.Text;
+            bool checkbox = checkBoxGrant.Checked ? true : false;
+            string sqlGrant = "grant " + per;
+            if (on != "")
+            {
+                sqlGrant += " on " + on;
+            }
+            if (col != "")
+            {
+                string view = "create or replace view " + on + col + " as select " + col + " from " + on;
+                try
+                {
+                    conn.Open();
+                    OracleCommand cmd = conn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = view;
+                    cmd.ExecuteNonQuery();
+                    string grant_view = "grant " +per+ " on " +on+col + " to " + user;
+                    if (checkbox)
+                        grant_view += " with grant option";
+                    OracleCommand cmd1 = conn.CreateCommand();
+                    cmd1.CommandType = CommandType.Text;
+                    cmd1.CommandText = grant_view;
+                    cmd1.ExecuteNonQuery();
+                    message = "Cấp quyền thành công!";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    message = "Error! " + ex.ToString();
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                DialogResult rs1 = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+                
+                return;
+            }
+            try
+            {
+                conn.Open();
+                sqlGrant += " to " + user;
+                if (checkbox)
+                {
+                    if(txtColGrant.Enabled == true)
+                        sqlGrant += " with grant option";
+                    else
+                        sqlGrant += " with admin option";
+                }
+                OracleCommand cmd1 = conn.CreateCommand();
+                cmd1.CommandType = CommandType.Text;
+                cmd1.CommandText = sqlGrant;
+                cmd1.ExecuteNonQuery();
+                message = "Cấp quyền thành công!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                message = "Error! " + ex.ToString();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            //if (rs == DialogResult.OK)
+            //    this.Close();
+        }
+
+        private void txtUserPriv_TextChanged(object sender, EventArgs e)
+        {
+            if (txtUserPriv.Text != "")
+            {
+                txtPerGrant.Enabled = true;
+                checkBoxGrant.Enabled = true;
+                btnAccept.Enabled = true;
+            }
+            else
+            {
+                txtPerGrant.Enabled = false;
+                checkBoxGrant.Enabled = false;
+                btnAccept.Enabled = false;
+            }
         }
     }
 }
