@@ -26,39 +26,40 @@ namespace DA_PhanHe1
             
         }
 
-        private void btnUserRefresh_Click(object sender, EventArgs e)
-        {
-                //DataTable dt = new DataTable();
-                //OracleCommand cmd = new OracleCommand("sp_viewuser", conn);
-                //cmd.CommandType = CommandType.StoredProcedure;
-                //cmd.Parameters.Add(
-                //    new OracleParameter
-                //    {
-                //        ParameterName = "c",
-                //        Direction = ParameterDirection.Output,
-                //        OracleDbType = OracleDbType.RefCursor
-                //    }
-                //);
-                //cmd.ExecuteNonQuery();
-                //OracleDataAdapter da = new OracleDataAdapter(cmd);
-                //da.Fill(dt);
-                //ListUser.DataSource = dt;
-                string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
-                var conn = new OracleConnection(connectionstring);
-                conn.Open();
-                DataTable dt = new DataTable();
-                OracleCommand cmd = new OracleCommand("select username, default_tablespace, created, last_login, account_status from dba_users", conn);
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
-                da.Fill(dt);
-                ListUser.DataSource = dt;
+        //private void btnUserRefresh_Click(object sender, EventArgs e)
+        //{
+        //        //DataTable dt = new DataTable();
+        //        //OracleCommand cmd = new OracleCommand("sp_viewuser", conn);
+        //        //cmd.CommandType = CommandType.StoredProcedure;
+        //        //cmd.Parameters.Add(
+        //        //    new OracleParameter
+        //        //    {
+        //        //        ParameterName = "c",
+        //        //        Direction = ParameterDirection.Output,
+        //        //        OracleDbType = OracleDbType.RefCursor
+        //        //    }
+        //        //);
+        //        //cmd.ExecuteNonQuery();
+        //        //OracleDataAdapter da = new OracleDataAdapter(cmd);
+        //        //da.Fill(dt);
+        //        //ListUser.DataSource = dt;
+        //        string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
+        //        var conn = new OracleConnection(connectionstring);
+        //        conn.Open();
+        //        DataTable dt = new DataTable();
+        //        OracleCommand cmd = new OracleCommand("select username, default_tablespace, created, last_login, account_status from dba_users", conn);
+        //        OracleDataAdapter da = new OracleDataAdapter(cmd);
+        //        da.Fill(dt);
+        //        ListUser.DataSource = dt;
             
-        }
+        //}
 
         private void btnUserAdd_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormAddUser fm = new FormAddUser();
-            fm.Show();
+            fm.ShowDialog();
+            this.Show();
         }
         private void getUsers()
         {
@@ -91,8 +92,133 @@ namespace DA_PhanHe1
 
         private void btnUserRefresh_Click(object sender, EventArgs e)
         {
-            UserGridView.Refresh();
+            getUsers();
+            txtUserSearch.Text = "";
         }
 
+        private void btnUserDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult rq = MessageBox.Show("Bạn có thực sự muốn xóa user này?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.None);
+            if(rq == DialogResult.Yes)
+            {
+                string message = "";
+                try
+                {
+                    int index_row = UserGridView.CurrentCell.RowIndex;
+                    if (index_row != -1)
+                    {
+                        OracleCommand cmd = conn.CreateCommand();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                        cmd.ExecuteNonQuery();
+                        string username = UserGridView.Rows[index_row].Cells[0].Value.ToString();
+                        string del_user = "drop user " + username + " CASCADE";
+                        OracleCommand cmd1 = conn.CreateCommand();
+                        cmd1.CommandType = CommandType.Text;
+                        cmd1.CommandText = del_user;
+                        cmd1.ExecuteNonQuery();
+                        message = "Xóa thành công!";
+                    }
+                    else
+                    {
+                        message = "Bạn chưa chọn user!";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    message = "Error! " + ex.ToString();
+                }
+                DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+        }
+
+        private void btnUserViewPriv_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormUserPriv fm = new FormUserPriv();
+            fm.ShowDialog();
+            this.Show();
+        }
+
+        private void btnUserRevoke_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormRevoke fm = new FormRevoke();
+            fm.ShowDialog();
+            this.Show();
+        }
+
+        private void btnRoleSearch_Click(object sender, EventArgs e)
+        {
+            string txtRolename = txtRoleSearch.Text;
+            if (txtRolename == "")
+            {
+                getRole();
+            }
+            else
+            {
+                RoleGridView.DataSource = this.conn.Query<Roles>("sp_findrole", new { role_name = txtRolename }, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        private void btnRoleRefresh_Click(object sender, EventArgs e)
+        {
+            getRole();
+            txtRoleSearch.Text = "";
+        }
+
+        private void btnRoleAdd_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormAddRole fm = new FormAddRole();
+            fm.ShowDialog();
+            this.Show();
+        }
+
+        private void btnRoleDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult rq = MessageBox.Show("Bạn có thực sự muốn xóa role này?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.None);
+            if (rq.Equals(DialogResult.Yes))
+            {
+                string message = "";
+                try
+                {
+                    int index_row = RoleGridView.CurrentCell.RowIndex;
+                    if (index_row != -1)
+                    {
+                        OracleCommand cmd = conn.CreateCommand();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                        cmd.ExecuteNonQuery();
+                        string rolename = RoleGridView.Rows[index_row].Cells[0].Value.ToString();
+                        string del_role = "drop role " + rolename;
+                        OracleCommand cmd1 = conn.CreateCommand();
+                        cmd1.CommandType = CommandType.Text;
+                        cmd1.CommandText = del_role;
+                        cmd1.ExecuteNonQuery();
+                        message = "Xóa thành công!";
+                    }
+                    else
+                    {
+                        message = "Bạn chưa chọn role!";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    message = "Error! " + ex.ToString();
+                }
+                DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormRoleViewPriv fm = new FormRoleViewPriv();
+            fm.ShowDialog();
+            this.Show();
+        }
     }
 }

@@ -25,17 +25,28 @@ namespace DA_PhanHe1
             try
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand("sp_createuser", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("usr", OracleDbType.Varchar2).Value = txtUsernameAdd.Text;
-                cmd.Parameters.Add("pw", OracleDbType.Varchar2).Value = txtPasswordAdd.Text;
-                cmd.Parameters.Add("message", OracleDbType.Varchar2).Direction = ParameterDirection.Output;
+                OracleCommand cmd = conn.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
                 cmd.ExecuteNonQuery();
-                message = cmd.Parameters["message"].Value.ToString();
+                string create_user = "create user " + txtUsernameAdd.Text + " identified by " + txtPasswordAdd.Text;
+                OracleCommand cmd1 = conn.CreateCommand();
+                cmd1.CommandType = CommandType.Text;
+                cmd1.CommandText = create_user;
+                cmd1.ExecuteNonQuery();
+                message = "Thêm thành công!";
+                //OracleCommand cmd = new OracleCommand("sp_createuser", conn);
+                //cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.Add("usr", OracleDbType.Varchar2).Value = txtUsernameAdd.Text;
+                //cmd.Parameters.Add("pw", OracleDbType.Varchar2).Value = txtPasswordAdd.Text;
+                //cmd.Parameters.Add("message", OracleDbType.Varchar2).Direction = ParameterDirection.Output;
+                //cmd.ExecuteNonQuery();
+                //message = cmd.Parameters["message"].Value.ToString();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                message = "Error! " + ex.ToString();
             }
             finally
             {

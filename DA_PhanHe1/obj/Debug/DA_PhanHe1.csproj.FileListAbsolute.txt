@@ -25,7 +25,6 @@ D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.AssemblyReference.
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.SuggestedBindingRedirects.cache
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormLogin.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormMenu.resources
-D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormUserList.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.Properties.Resources.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.GenerateResource.cache
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.csproj.CoreCompileInputs.cache
@@ -36,3 +35,5 @@ D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormAddRole.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormAddUser.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormGrant.resources
 D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormRevoke.resources
+D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormUserPriv.resources
+D:\BaiTap\ATTT\project\DA_PhanHe1\obj\Debug\DA_PhanHe1.FormRoleViewPriv.resources
