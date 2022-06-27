@@ -28,8 +28,9 @@ namespace DA_PhanHe1
 
         private void getPriv()
         {
+            //select grantee, grantor, privilege, table_name, grantable from dba_tab_privs where grantor = upper('" + Username + "')";
             DataTable dt = new DataTable();
-            string priv_user = "select grantee, grantor, privilege, table_name, grantable from dba_tab_privs where grantor = upper('" + Username + "')";
+            string priv_user = "SELECT DBA_TAB_PRIVS.TABLE_NAME, DBA_TAB_PRIVS.PRIVILEGE, DBA_TAB_PRIVS.GRANTABLE, DBA_COL_PRIVS.COLUMN_NAME from DBA_TAB_PRIVS left join DBA_COL_PRIVS on DBA_TAB_PRIVS.TABLE_NAME = DBA_COL_PRIVS.TABLE_NAME WHERE DBA_TAB_PRIVS.GRANTEE IN (select GRANTED_ROLE from DBA_ROLE_PRIVS where GRANTEE = upper('" + Username + "'))";
             OracleCommand cmd = new OracleCommand(priv_user, this.conn);
             OracleDataAdapter da = new OracleDataAdapter(cmd);
             da.Fill(dt);
@@ -87,7 +88,7 @@ namespace DA_PhanHe1
             //conn.Open();
             string priv = txtUserPriv.Text;
             DataTable dt = new DataTable();
-            string priv_user = "select grantee, grantor, privilege, table_name, grantable from dba_tab_privs where grantor = upper('" + Username + "') and privilege = upper('" + priv + "')";
+            string priv_user = "SELECT DBA_TAB_PRIVS.TABLE_NAME, DBA_TAB_PRIVS.PRIVILEGE, DBA_TAB_PRIVS.GRANTABLE, DBA_COL_PRIVS.COLUMN_NAME from DBA_TAB_PRIVS left join DBA_COL_PRIVS on DBA_TAB_PRIVS.TABLE_NAME = DBA_COL_PRIVS.TABLE_NAME WHERE DBA_TAB_PRIVS.GRANTEE IN (select GRANTED_ROLE from DBA_ROLE_PRIVS where GRANTEE = upper('" + Username + "')) and DBA_TAB_PRIVS.PRIVILEGE = upper('" + priv + "')";
             OracleCommand cmd = new OracleCommand(priv_user, this.conn);
             OracleDataAdapter da = new OracleDataAdapter(cmd);
             da.Fill(dt);
@@ -96,37 +97,33 @@ namespace DA_PhanHe1
 
         private void FormUserPriv_Load(object sender, EventArgs e)
         {
-            txtOnGrant.Enabled = false;
-            txtColGrant.Enabled = false;
+            //cbPermission.SelectedIndex = cbPermission.FindStringExact("SELECT");
+            cbPermission.SelectedIndex = 0;
+            DataTable dt = new DataTable();
+            string query = "select TABLE_NAME from user_tables";
+            OracleCommand cmd = new OracleCommand(query, this.conn);
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            da.Fill(dt);
+            cbTable.DataSource = dt;
+            cbTable.DisplayMember = "TABLE_NAME";
+            cbTable.ValueMember = "TABLE_NAME";
+            cbTable.SelectedIndex = 0;
         }
 
-
-        private void txtPerGrant_TextChanged(object sender, EventArgs e)
+        private void cbTable_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(txtPerGrant.Text.ToLower() == "select" || txtPerGrant.Text.ToLower() == "insert"
-                || txtPerGrant.Text.ToLower() == "update" ||  txtPerGrant.Text.ToLower() == "delete")
-            {
-                txtOnGrant.Enabled = true;
-            }
-            else
-            {
-                txtOnGrant.Enabled = false;
-            }
+            string table = cbTable.Text;
+            DataTable col = new DataTable();
+            string query = "SELECT column_name FROM USER_TAB_COLUMNS WHERE table_name = '" + table + "'";
+            OracleCommand cmd = new OracleCommand(query, this.conn);
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            da.Fill(col);
+            col.Rows.Add("ALL COLUMN");
+            cbColumn.DataSource = col;
+            cbColumn.DisplayMember = "COLUMN_NAME";
+            cbColumn.ValueMember = "COLUMN_NAME";
+            cbColumn.SelectedIndex = cbColumn.FindStringExact("ALL COLUMN");
         }
-
-        private void txtOnGrant_TextChanged(object sender, EventArgs e)
-        {
-            if(txtPerGrant.Text.ToLower() == "select" || txtPerGrant.Text.ToLower() == "update")
-            {
-                txtColGrant.Enabled = true;
-            }
-            else
-            {
-                txtColGrant.Enabled = false;
-            }
-        }
-
-      
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
@@ -134,16 +131,12 @@ namespace DA_PhanHe1
             var conn = new OracleConnection(connectionstring);
             string message = "";
             string user = Username;
-            string per = txtPerGrant.Text;
-            string on = txtOnGrant.Text;
-            string col = txtColGrant.Text;
+            string per = cbPermission.Text;
+            string on = cbTable.Text;
+            string col = cbColumn.Text;
             bool checkbox = checkBoxGrant.Checked ? true : false;
-            string sqlGrant = "grant " + per;
-            if (on != "")
-            {
-                sqlGrant += " on " + on;
-            }
-            if (col != "")
+            string sqlGrant = "grant " + per + " on " + on ;
+            if (col != "ALL COLUMN")
             {
                 string view = "create or replace view " + on + col + " as select " + col + " from " + on;
                 try
@@ -153,7 +146,7 @@ namespace DA_PhanHe1
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = view;
                     cmd.ExecuteNonQuery();
-                    string grant_view = "grant " +per+ " on " +on+col + " to " + user;
+                    string grant_view = "grant " + per + " on " + on + col + " to " + user;
                     if (checkbox)
                         grant_view += " with grant option";
                     OracleCommand cmd1 = conn.CreateCommand();
@@ -173,7 +166,7 @@ namespace DA_PhanHe1
                 }
 
                 DialogResult rs1 = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
-                
+
                 return;
             }
             try
@@ -182,7 +175,7 @@ namespace DA_PhanHe1
                 sqlGrant += " to " + user;
                 if (checkbox)
                 {
-                    if(txtColGrant.Enabled == true)
+                    if (cbColumn.Enabled == true)
                         sqlGrant += " with grant option";
                     else
                         sqlGrant += " with admin option";
@@ -208,6 +201,133 @@ namespace DA_PhanHe1
             //if (rs == DialogResult.OK)
             //    this.Close();
         }
+
+        private void cbPermission_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbPermission.Text == "SELECT" || cbPermission.Text == "UPDATE")
+            {
+                cbColumn.Enabled = true;
+            }
+            else
+            {
+                cbColumn.Enabled = false;
+            }    
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            getPriv();
+            txtUserPriv.Text = "";
+        }
+
+
+        //private void txtPerGrant_TextChanged(object sender, EventArgs e)
+        //{
+        //    if(txtPerGrant.Text.ToLower() == "select" || txtPerGrant.Text.ToLower() == "insert"
+        //        || txtPerGrant.Text.ToLower() == "update" ||  txtPerGrant.Text.ToLower() == "delete")
+        //    {
+        //        txtOnGrant.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        txtOnGrant.Enabled = false;
+        //    }
+        //}
+
+        //private void txtOnGrant_TextChanged(object sender, EventArgs e)
+        //{
+        //    if(txtPerGrant.Text.ToLower() == "select" || txtPerGrant.Text.ToLower() == "update")
+        //    {
+        //        txtColGrant.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        txtColGrant.Enabled = false;
+        //    }
+        //}
+
+
+
+        //private void btnAccept_Click(object sender, EventArgs e)
+        //{
+        //    string connectionstring = OracleConnect.connString("localhost", "1521", "orc21c", Admin_login.username, Admin_login.password);
+        //    var conn = new OracleConnection(connectionstring);
+        //    string message = "";
+        //    string user = Username;
+        //    //string per = txtPerGrant.Text;
+        //    string on = txtOnGrant.Text;
+        //    string col = txtColGrant.Text;
+        //    bool checkbox = checkBoxGrant.Checked ? true : false;
+        //    //string sqlGrant = "grant " + per;
+        //    if (on != "")
+        //    {
+        //        sqlGrant += " on " + on;
+        //    }
+        //    if (col != "")
+        //    {
+        //        string view = "create or replace view " + on + col + " as select " + col + " from " + on;
+        //        try
+        //        {
+        //            conn.Open();
+        //            OracleCommand cmd = conn.CreateCommand();
+        //            cmd.CommandType = CommandType.Text;
+        //            cmd.CommandText = view;
+        //            cmd.ExecuteNonQuery();
+        //            string grant_view = "grant " +per+ " on " +on+col + " to " + user;
+        //            if (checkbox)
+        //                grant_view += " with grant option";
+        //            OracleCommand cmd1 = conn.CreateCommand();
+        //            cmd1.CommandType = CommandType.Text;
+        //            cmd1.CommandText = grant_view;
+        //            cmd1.ExecuteNonQuery();
+        //            message = "Cấp quyền thành công!";
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine(ex.ToString());
+        //            message = "Error! " + ex.ToString();
+        //        }
+        //        finally
+        //        {
+        //            conn.Close();
+        //        }
+
+        //        DialogResult rs1 = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+        //        return;
+        //    }
+        //    try
+        //    {
+        //        conn.Open();
+        //        sqlGrant += " to " + user;
+        //        if (checkbox)
+        //        {
+        //            if(txtColGrant.Enabled == true)
+        //                sqlGrant += " with grant option";
+        //            else
+        //                sqlGrant += " with admin option";
+        //        }
+        //        OracleCommand cmd1 = conn.CreateCommand();
+        //        cmd1.CommandType = CommandType.Text;
+        //        cmd1.CommandText = sqlGrant;
+        //        cmd1.ExecuteNonQuery();
+        //        message = "Cấp quyền thành công!";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        message = "Error! " + ex.ToString();
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+
+        //    DialogResult rs = MessageBox.Show(message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+        //    //if (rs == DialogResult.OK)
+        //    //    this.Close();
+        //}
 
         //private void txtUserPriv_TextChanged(object sender, EventArgs e)
         //{

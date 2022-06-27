@@ -158,10 +158,10 @@ namespace DA_PhanHe1
                 int index_row = UserGridView.CurrentCell.RowIndex;
                 if (index_row != -1)
                 {
-                    OracleCommand cmd = conn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
-                    cmd.ExecuteNonQuery();
+                    //OracleCommand cmd = conn.CreateCommand();
+                    //cmd.CommandType = CommandType.Text;
+                    //cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                    //cmd.ExecuteNonQuery();
                     string username = UserGridView.Rows[index_row].Cells[0].Value.ToString();
 
                     this.Hide();
@@ -262,10 +262,10 @@ namespace DA_PhanHe1
                 int index_row = RoleGridView.CurrentCell.RowIndex;
                 if (index_row != -1)
                 {
-                    OracleCommand cmd = conn.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
-                    cmd.ExecuteNonQuery();
+                    //OracleCommand cmd = conn.CreateCommand();
+                    //cmd.CommandType = CommandType.Text;
+                    //cmd.CommandText = "alter session set \"_ORACLE_SCRIPT\"=true";
+                    //cmd.ExecuteNonQuery();
                     string rolename = RoleGridView.Rows[index_row].Cells[0].Value.ToString();
 
                     this.Hide();
@@ -281,5 +281,6 @@ namespace DA_PhanHe1
 
             this.Show();
         }
+
     }
 }
