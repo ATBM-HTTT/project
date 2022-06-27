@@ -14,7 +14,7 @@ as
  begin
     open c for
     select role, password_required, authentication_type, common 
-    from dba_roles
+    from dba_roles;
     dbms_sql.return_result(c);
 end;
 /
@@ -256,7 +256,7 @@ begin
     end;
     end if;
 end;
-
+/
 create or replace procedure sp_revokepriv_column(usr varchar2, col_name varchar2, priv varchar2)
 as
     priv_exist number := 0;
@@ -276,7 +276,7 @@ begin
     end;
     end if;
 end;
-
+/
 create or replace procedure sp_revokerole(usr varchar2, role_name varchar2)
 as
     priv_exist number := 0;
@@ -295,7 +295,7 @@ begin
     end;
     end if;
 end;
-
+/
 create or replace procedure sp_grantrole(usr varchar2, role_name varchar2, opt boolean)
 as
     role_exist number := 0;
